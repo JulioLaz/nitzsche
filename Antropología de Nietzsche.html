@@ -1,0 +1,790 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Antropología de Nietzsche</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Concepto: árbol horizontal de cinco ramas bajo una raíz; cada rama tiene su color y cada nodo abre una ventana emergente. */
+:root {
+  --bg: #E8EBF0;
+  --surface: #F6F7FA;
+  --ink: #171B2B;
+  --muted: #56607A;
+  --line: #9AA3B8;
+  --root-bg: #171B2B;
+  --root-fg: #F1F2F7;
+  --scrim: rgba(14, 17, 28, 0.55);
+  --c1: #1F6F66;
+  --c2: #A3274F;
+  --c3: #A8700F;
+  --c4: #3F5784;
+  --c5: #6A3FA0;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11141F;
+    --surface: #1A1F2E;
+    --ink: #E9ECF5;
+    --muted: #A2ABC2;
+    --line: #4B5572;
+    --root-bg: #E9ECF5;
+    --root-fg: #11141F;
+    --scrim: rgba(4, 5, 10, 0.68);
+    --c1: #4FC1B3;
+    --c2: #E66A90;
+    --c3: #E0A040;
+    --c4: #8FA8DD;
+    --c5: #B391E6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11141F;
+  --surface: #1A1F2E;
+  --ink: #E9ECF5;
+  --muted: #A2ABC2;
+  --line: #4B5572;
+  --root-bg: #E9ECF5;
+  --root-fg: #11141F;
+  --scrim: rgba(4, 5, 10, 0.68);
+  --c1: #4FC1B3;
+  --c2: #E66A90;
+  --c3: #E0A040;
+  --c4: #8FA8DD;
+  --c5: #B391E6;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  padding-inline: 16px;
+  padding-block: 28px 48px;
+}
+button { font: inherit; color: inherit; }
+button:focus-visible { outline: 3px solid var(--bc, var(--ink)); outline-offset: 2px; }
+
+.wrap { max-width: 1320px; margin-inline: auto; }
+
+header { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+.hint { margin: 0; color: var(--muted); max-width: 62ch; }
+
+/* Raíz */
+.root-wrap { position: relative; display: flex; justify-content: center; margin-bottom: 28px; }
+.root {
+  display: block;
+  text-align: center;
+  background: var(--root-bg);
+  color: var(--root-fg);
+  border: 0;
+  border-radius: 6px;
+  padding: 14px 30px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.root:hover { transform: translateY(-2px); }
+.root .t { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1.45rem; line-height: 1.15; }
+.root .s { display: block; margin-top: 3px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.8; }
+
+/* Ramas */
+.cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px 16px; }
+@media (min-width: 640px) { .cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) {
+  .cols { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .root-wrap::after { content: ""; position: absolute; left: 50%; top: 100%; width: 2px; height: 28px; margin-left: -1px; background: var(--line); }
+  .branch::before { content: ""; position: absolute; top: -28px; left: -8px; right: -8px; height: 2px; background: var(--line); }
+  .branch:first-child::before { left: 50%; }
+  .branch:last-child::before { right: 50%; }
+  .branch::after { content: ""; position: absolute; top: -28px; left: 50%; width: 2px; height: 28px; margin-left: -1px; background: var(--line); }
+}
+.branch { position: relative; min-width: 0; }
+.branch[data-b="1"] { --bc: var(--c1); }
+.branch[data-b="2"] { --bc: var(--c2); }
+.branch[data-b="3"] { --bc: var(--c3); }
+.branch[data-b="4"] { --bc: var(--c4); }
+.branch[data-b="5"] { --bc: var(--c5); }
+
+.head {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: color-mix(in srgb, var(--bc) 14%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--bc) 40%, var(--surface));
+  border-top: 4px solid var(--bc);
+  border-radius: 6px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.head:hover { background: color-mix(in srgb, var(--bc) 24%, var(--surface)); }
+.head .no { display: block; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; color: var(--bc); font-weight: 500; }
+.head .name { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; line-height: 1.2; }
+.head .q { display: block; margin-top: 2px; font-size: 0.85rem; color: var(--muted); }
+
+/* Árbol de conceptos */
+.kids { list-style: none; margin: 4px 0 0 22px; padding: 0; }
+.kids .kids { margin: 2px 0 0 14px; }
+.kids li { position: relative; padding: 5px 0 5px 20px; }
+.kids li::before { content: ""; position: absolute; left: 0; top: calc(5px + 1.55rem); width: 16px; height: 2px; background: var(--bc); }
+.kids li::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--bc); }
+.kids li:last-child::after { bottom: auto; height: calc(5px + 1.55rem + 2px); }
+
+.node {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--surface);
+  border: 1.5px solid color-mix(in srgb, var(--bc) 50%, var(--surface));
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-weight: 500;
+  font-size: 0.92rem;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.node:hover { background: color-mix(in srgb, var(--bc) 14%, var(--surface)); border-color: var(--bc); transform: translateX(2px); }
+.node .sub { display: block; margin-top: 2px; font-family: var(--font-mono); font-weight: 400; font-size: 0.72rem; color: var(--muted); }
+.kids .kids .node { font-size: 0.86rem; padding: 6px 10px; }
+
+/* Ventana emergente */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: var(--scrim);
+  animation: fade 0.15s ease;
+}
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  max-height: 100%;
+  overflow-y: auto;
+  background: var(--surface);
+  border-top: 6px solid var(--bc);
+  border-radius: 8px;
+  padding: 24px 24px 18px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  animation: rise 0.18s ease;
+}
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .overlay, .card { animation: none; }
+  .node, .root, .head { transition: none; }
+}
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+}
+.close:hover { background: color-mix(in srgb, var(--bc) 14%, var(--surface)); color: var(--ink); }
+.card .eyebrow { color: var(--bc); font-weight: 500; padding-right: 40px; }
+.card h2 { margin: 6px 0 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 4vw, 1.9rem); line-height: 1.15; text-wrap: balance; padding-right: 32px; }
+.de { margin: 6px 0 0; font-family: var(--font-display); font-style: italic; color: var(--muted); }
+.body { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; max-width: 65ch; }
+.body p { margin: 0; }
+.relh { margin: 18px 0 8px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  background: color-mix(in srgb, var(--bc) 12%, var(--surface));
+  border: 1.5px solid color-mix(in srgb, var(--bc) 55%, var(--surface));
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.chip:hover { background: color-mix(in srgb, var(--bc) 24%, var(--surface)); border-color: var(--bc); }
+.pager { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 20px; padding-top: 12px; border-top: 1px solid var(--line); }
+.pager button { background: transparent; border: 0; border-radius: 6px; padding: 6px 10px; font-size: 0.9rem; cursor: pointer; color: var(--ink); }
+.pager button:hover { background: color-mix(in srgb, var(--bc) 14%, var(--surface)); }
+.pager button:disabled { opacity: 0.35; cursor: default; background: transparent; }
+.pos { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+
+/* Adaptación a móvil */
+html { -webkit-text-size-adjust: 100%; }
+button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.card { overscroll-behavior: contain; padding-bottom: 0; }
+.pager {
+  position: sticky;
+  bottom: 0;
+  margin-inline: -24px;
+  padding: 12px 24px calc(14px + env(safe-area-inset-bottom, 0px));
+  background: var(--surface);
+}
+.close { width: 44px; height: 44px; top: 6px; right: 6px; }
+.card h2 { padding-right: 44px; }
+.pager button { min-height: 44px; padding: 8px 14px; }
+.chip { min-height: 40px; display: inline-flex; align-items: center; padding: 6px 14px; }
+.node { min-height: 48px; }
+
+.head-row { display: flex; align-items: stretch; }
+.head-row .head { flex: 1; min-width: 0; border-radius: 6px 0 0 6px; border-right: 0; }
+.tog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 52px;
+  background: color-mix(in srgb, var(--bc) 14%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--bc) 40%, var(--surface));
+  border-top: 4px solid var(--bc);
+  border-radius: 0 6px 6px 0;
+  color: var(--bc);
+  cursor: pointer;
+}
+.chev {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform 0.15s ease;
+}
+.branch.closed .chev { transform: rotate(-45deg); }
+.branch.closed > .kids { display: none; }
+@media (min-width: 1100px) {
+  .tog { display: none; }
+  .head-row .head { border-radius: 6px; border-right: 1px solid color-mix(in srgb, var(--bc) 40%, var(--surface)); }
+  .branch.closed > .kids { display: block; }
+}
+
+@media (hover: none) {
+  .node:hover { background: var(--surface); border-color: color-mix(in srgb, var(--bc) 50%, var(--surface)); transform: none; }
+  .head:hover { background: color-mix(in srgb, var(--bc) 14%, var(--surface)); }
+  .root:hover { transform: none; }
+  .chip:hover { background: color-mix(in srgb, var(--bc) 12%, var(--surface)); border-color: color-mix(in srgb, var(--bc) 55%, var(--surface)); }
+  .close:hover { background: transparent; color: var(--muted); }
+  .pager button:hover { background: transparent; }
+}
+
+@keyframes sheet { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+@media (max-width: 639px) {
+  .overlay { align-items: flex-end; padding: 0; }
+  .card { max-width: none; max-height: 88%; border-radius: 14px 14px 0 0; padding: 20px 18px 0; animation: sheet 0.2s ease; }
+  .pager { margin-inline: -18px; padding-inline: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card { animation: none; }
+  .chev { transition: none; }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Mapa conceptual · Friedrich Nietzsche</p>
+    <h1>Antropología de Nietzsche</h1>
+    <p class="hint">Tocá cualquier concepto del mapa para abrir su explicación. Dentro de la ventana podés pasar al concepto anterior o siguiente, o saltar a los que se conectan con él.</p>
+  </header>
+
+  <div class="root-wrap">
+    <button class="root" id="root-btn" data-id="root" type="button">
+      <span class="t">Antropología de Nietzsche</span>
+      <span class="s">¿Qué es el ser humano?</span>
+    </button>
+  </div>
+  <div class="cols" id="cols"></div>
+</div>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="card" id="card" role="dialog" aria-modal="true" aria-labelledby="m-title">
+    <button class="close" id="m-close" type="button" aria-label="Cerrar">×</button>
+    <p class="eyebrow" id="m-eyebrow"></p>
+    <h2 id="m-title"></h2>
+    <p class="de" id="m-de" hidden></p>
+    <div class="body" id="m-body"></div>
+    <div id="m-rel-wrap">
+      <p class="relh">Se conecta con</p>
+      <div class="chips" id="m-rel"></div>
+    </div>
+    <div class="pager">
+      <button id="m-prev" type="button">← Anterior</button>
+      <span class="pos" id="m-pos"></span>
+      <button id="m-next" type="button">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ROOT = {
+    id: 'root',
+    label: 'Antropología de Nietzsche',
+    de: '',
+    body: [
+      'Nietzsche no responde a «¿qué es el hombre?» con una sustancia fija ni con un alma inmortal. Para él, el ser humano no es un fin en sí mismo ni el centro racional de la creación.',
+      'Lo describe como un organismo biológico inestable, inacabado y en permanente transformación. Su pensamiento desplaza la razón del centro de la vida humana y pone en su lugar el cuerpo, los instintos y la cultura.'
+    ],
+    rel: ['b1', 'b2', 'b3', 'b4', 'b5']
+  };
+
+  var BRANCHES = [
+    {
+      id: 'b1', no: '1', label: 'Concepción', q: '¿Qué es el ser humano?',
+      body: [
+        'El ser humano carece de una naturaleza fija: es un animal indeterminado y frágil, pero también plástico e inventivo.',
+        'Su centro no es la razón sino el cuerpo. Por eso Nietzsche rompe con la tradición que subordinaba la materia al alma o a la mente.'
+      ],
+      rel: ['animal', 'cuerpo', 'dualismo'],
+      kids: [
+        {
+          id: 'animal', label: 'Animal no fijado', sub: 'sin naturaleza fija',
+          de: 'Das noch nicht festgestellte Tier',
+          body: [
+            'Los animales no humanos tienen instintos y pautas de conducta rígidamente adaptados a un nicho ecológico. El ser humano, en cambio, carece de una naturaleza fija: es un animal todavía no determinado.',
+            'Esa indeterminación lo vuelve frágil y arriesgado, pero también plástico e inventivo.'
+          ],
+          rel: ['nicho', 'protesis', 'b1'],
+          kids: [
+            {
+              id: 'nicho', label: 'Falta de nicho instintivo', sub: 'sin respuestas automáticas',
+              body: [
+                'Al no contar con respuestas mecánicas automatizadas para sobrevivir, el ser humano es la criatura más enferma y arriesgada.',
+                'Esa misma ausencia lo convierte en la más plástica e inventiva.'
+              ],
+              rel: ['animal', 'protesis']
+            },
+            {
+              id: 'protesis', label: 'La cultura como prótesis', sub: 'lenguaje · moral · religión',
+              body: [
+                'Como su comportamiento biológico no está cerrado, el ser humano se ve obligado a inventar lenguajes, morales, instituciones y religiones.',
+                'Con ellas se da estabilidad y se protege de su propia desorientación.'
+              ],
+              rel: ['animal', 'nicho']
+            }
+          ]
+        },
+        {
+          id: 'cuerpo', label: 'Primacía del cuerpo', sub: '«Gran Razón»',
+          body: [
+            'Nietzsche invierte la tradición occidental, de Platón a Descartes, que subordinaba el cuerpo y la materia al imperio del alma o la mente.',
+            'Para él, el cuerpo es el punto de partida: una pluralidad de sentidos, instintos y fuerzas con su propia lógica de autorregulación.'
+          ],
+          rel: ['gran', 'conciencia', 'dualismo'],
+          kids: [
+            {
+              id: 'gran', label: 'Gran Razón y Pequeña Razón', sub: 'cuerpo frente a mente',
+              de: 'Así habló Zaratustra',
+              body: [
+                'En Así habló Zaratustra, el cuerpo es una «gran razón»: una pluralidad de sentidos, instintos y fuerzas que se regula a sí misma.',
+                'Lo que habitualmente llamamos mente o conciencia es apenas la «pequeña razón», un instrumento efímero de esa estructura corporal.'
+              ],
+              rel: ['cuerpo', 'conciencia']
+            },
+            {
+              id: 'conciencia', label: 'La conciencia como herramienta social', sub: 'fenómeno tardío',
+              body: [
+                'La conciencia no es la sede de la verdad ni de la libertad. Es un fenómeno tardío, surgido por la necesidad de comunicarse y sobrevivir en comunidad.',
+                'Pensamos en palabras porque tuvimos que adaptarnos a la vida social, pero la mayor parte de nuestra vida mental ocurre a un nivel instintivo no consciente.'
+              ],
+              rel: ['gran', 'cuerpo']
+            }
+          ]
+        },
+        {
+          id: 'dualismo', label: 'Crítica al dualismo racional', sub: 'alma sobre cuerpo',
+          body: [
+            'Es la crítica a la tradición filosófica que supedita la materia y el cuerpo al imperio del alma o de la mente, desde Platón hasta Descartes.',
+            'Nietzsche la invierte y sitúa en su lugar la corporidad, los instintos y la cultura.'
+          ],
+          rel: ['cuerpo', 'socrates']
+        }
+      ]
+    },
+    {
+      id: 'b2', no: '2', label: 'Tensión', q: '¿Qué lo desgarra?',
+      body: [
+        'En El nacimiento de la tragedia, Nietzsche plantea que la experiencia humana está determinada por la interacción de dos impulsos primordiales: lo dionisíaco y lo apolíneo.',
+        'La tragedia griega los mantenía en equilibrio. El socratismo y el platonismo rompieron ese equilibrio.'
+      ],
+      rel: ['dio', 'apo', 'socrates'],
+      kids: [
+        {
+          id: 'dio', label: 'Lo Dionisíaco', sub: 'instinto · caos',
+          body: [
+            'Inspirado en el dios del vino y la embriaguez, representa la vida instintiva desbordante, el caos, el dolor orgiástico, la disolución del individuo y la fusión con la naturaleza.',
+            'Es la energía vital pura, con toda su crudeza y su sufrimiento.'
+          ],
+          rel: ['apo', 'socrates']
+        },
+        {
+          id: 'apo', label: 'Lo Apolíneo', sub: 'razón · forma',
+          body: [
+            'Inspirado en el dios de la luz y las formas, representa la medida, el orden, la contención, la razón y la ilusión de la individualidad.',
+            'Construye un «velo» de belleza sobre el caos dionisíaco para hacer la existencia soportable.'
+          ],
+          rel: ['dio', 'socrates']
+        },
+        {
+          id: 'socrates', label: 'Roto por el socratismo / platonismo', sub: 'el trauma socrático',
+          body: [
+            'Según Nietzsche, la tragedia griega clásica lograba un equilibrio perfecto entre ambas fuerzas.',
+            'Con Sócrates y Platón, la cultura occidental erradicó lo dionisíaco para imponer un dominio absoluto de lo apolíneo y racional. Así inauguró una era de represión de los instintos vitales.'
+          ],
+          rel: ['dio', 'apo', 'dualismo']
+        }
+      ]
+    },
+    {
+      id: 'b3', no: '3', label: 'Principio', q: '¿Qué lo mueve?',
+      body: [
+        'La Voluntad de Poder es el principio dinámico de toda la vida y, por lo tanto, de la condición humana.',
+        'Explica por qué la vida no se limita a conservarse: busca expandirse y superarse.'
+      ],
+      rel: ['voluntad', 'nosuperv', 'auto'],
+      kids: [
+        {
+          id: 'voluntad', label: 'Voluntad de Poder', sub: 'auto-superación · creación vital',
+          de: 'Wille zur Macht',
+          body: [
+            'Es el concepto central que define el principio dinámico de toda la vida y, por ende, de la condición humana.',
+            'En el ser humano se traduce en el impulso incesante de moldear el entorno, superar las propias limitaciones, dominar los propios impulsos y crear formas superiores de arte, pensamiento y valor.'
+          ],
+          rel: ['nosuperv', 'auto', 'uber'],
+          kids: [
+            {
+              id: 'nosuperv', label: 'No es mera supervivencia', sub: 'frente a Darwin y Schopenhauer',
+              body: [
+                'Nietzsche rechaza la idea darwiniana o schopenhaueriana de que el móvil principal de la vida sea la mera conservación o la huida del dolor.',
+                'Para él, la vida no busca conservarse sino expandirse, superar resistencias y afirmarse.'
+              ],
+              rel: ['voluntad', 'auto']
+            },
+            {
+              id: 'auto', label: 'Auto-superación y creación', sub: 'moldear · superar · crear',
+              body: [
+                'En el ser humano, la Voluntad de Poder se expresa como impulso a superar las propias limitaciones y a dominar los propios impulsos.',
+                'También como creación: formas de arte, pensamiento y valor superiores a las heredadas.'
+              ],
+              rel: ['voluntad', 'creador']
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'b4', no: '4', label: 'Crisis', q: '¿Qué se quiebra?',
+      body: [
+        'Es el diagnóstico de Nietzsche sobre la cultura occidental: una moral nacida del resentimiento, una agresividad vuelta hacia adentro y la pérdida de fe en un orden superior.',
+        'La consecuencia es el nihilismo, el abismo de la falta de sentido.'
+      ],
+      rel: ['dios', 'nihil', 'siervos', 'mala'],
+      kids: [
+        {
+          id: 'dios', label: 'La «Muerte de Dios»', sub: 'un hecho cultural',
+          body: [
+            'La famosa sentencia no es un acontecimiento teológico sino un hecho cultural.',
+            'Significa que las verdades absolutas, las explicaciones metafísicas y la fe en un orden moral superior han perdido su poder organizador para la civilización occidental.'
+          ],
+          rel: ['nihil', 'creador']
+        },
+        {
+          id: 'nihil', label: 'El Nihilismo', sub: 'pérdida de sentido',
+          body: [
+            'Al caer las viejas muletas metafísicas, el ser humano se enfrenta a un abismo de falta de sentido.',
+            'Si no crea nuevos valores, corre el riesgo de caer en el «nihilismo pasivo» o en la figura del Último Hombre.'
+          ],
+          rel: ['dios', 'ultimo', 'creador'],
+          kids: [
+            {
+              id: 'ultimo', label: 'El Último Hombre', sub: 'confort sin pasión',
+              body: [
+                'Es un ser humano empequeñecido, satisfecho con el confort material, sin grandes pasiones ni capacidad de creación.',
+                'Es el peligro que Nietzsche opone al Übermensch.'
+              ],
+              rel: ['nihil', 'uber']
+            }
+          ]
+        },
+        {
+          id: 'senores', label: 'Moral de Señores', sub: 'afirmación',
+          de: 'La genealogía de la moral',
+          body: [
+            'Nace de las naturalezas fuertes y aristocráticas que dicen «sí» a la vida.',
+            'Define lo «bueno» como lo noble, lo enérgico, lo bello y lo vital, mientras que lo «malo» es simplemente lo bajo, lo cobarde y lo mezquino.'
+          ],
+          rel: ['siervos', 'mala']
+        },
+        {
+          id: 'siervos', label: 'Moral de Siervos', sub: 'resentimiento',
+          de: 'La genealogía de la moral',
+          body: [
+            'Surge de la reacción de los débiles y oprimidos. Invierte los valores originales por venganza psicológica.',
+            'Califica de «malvado» lo que caracteriza a los fuertes (fuerza, orgullo, pasión) y glorifica como «bueno» lo que alivia la debilidad (humildad, paciencia, compasión, piedad).'
+          ],
+          rel: ['senores', 'mala']
+        },
+        {
+          id: 'mala', label: 'Mala conciencia', sub: 'culpa · remordimiento',
+          body: [
+            'Con la imposición de la sociedad estructurada y del Estado, los instintos agresivos y expansivos del ser humano no pudieron descargarse hacia afuera.',
+            'Se volvieron hacia el interior del propio individuo y originaron la culpa, el remordimiento y la «mala conciencia».'
+          ],
+          rel: ['siervos', 'senores']
+        }
+      ]
+    },
+    {
+      id: 'b5', no: '5', label: 'Propuesta', q: '¿Hacia dónde?',
+      body: [
+        'Frente al peligro del Último Hombre, Nietzsche concibe al ser humano actual como un puente hacia el Übermensch.',
+        'Para llegar allí, el espíritu atraviesa tres metamorfosis y aprende a afirmar la existencia entera.'
+      ],
+      rel: ['uber', 'creador', 'amor', 'meta'],
+      kids: [
+        {
+          id: 'uber', label: 'El Übermensch', sub: 'Superhombre',
+          body: [
+            'Representa el pleno desarrollo antropológico de la Voluntad de Poder.',
+            'El ser humano actual no es una meta final sino «un puente tendido entre el animal y el Superhombre».'
+          ],
+          rel: ['creador', 'amor', 'meta', 'voluntad'],
+          kids: [
+            {
+              id: 'creador', label: 'Creador de valores', sub: 'sentidos terrenales',
+              body: [
+                'No acepta morales heredadas: define y crea sus propios sentidos terrenales tras la muerte de Dios.'
+              ],
+              rel: ['uber', 'dios']
+            },
+            {
+              id: 'amor', label: 'Afirma la vida', sub: 'Amor Fati',
+              body: [
+                'Afirma la existencia trágica en su totalidad: acepta el dolor, el azar y la alegría sin buscar consuelo en mundos ultraterrenos.'
+              ],
+              rel: ['uber', 'dio']
+            }
+          ]
+        },
+        {
+          id: 'meta', label: 'Las tres metamorfosis', sub: 'camello → león → niño',
+          body: [
+            'Para alcanzar la condición del Übermensch, el espíritu humano debe atravesar tres metamorfosis: camello, león y niño.'
+          ],
+          rel: ['camello', 'leon', 'nino', 'uber'],
+          kids: [
+            {
+              id: 'camello', label: 'El Camello', sub: '«Tú debes»',
+              body: [
+                'Representa el espíritu sumiso que carga con el peso de los deberes tradicionales impuestos por la sociedad.'
+              ],
+              rel: ['leon', 'meta']
+            },
+            {
+              id: 'leon', label: 'El León', sub: '«Yo quiero»',
+              body: [
+                'Es el espíritu que se rebela contra el deber impuesto y conquista la libertad para decir «Yo quiero», destruyendo los viejos dogmas.'
+              ],
+              rel: ['camello', 'nino']
+            },
+            {
+              id: 'nino', label: 'El Niño', sub: '«Yo soy»',
+              body: [
+                'Representa la meta final: la inocencia, el olvido, el juego creativo y un nuevo comienzo.',
+                'Es capaz de crear un nuevo sistema de valores desde la afirmación vital.'
+              ],
+              rel: ['leon', 'meta']
+            }
+          ]
+        }
+      ]
+    }
+  ];
+
+  var N = {};
+  var ORDER = [];
+  N.root = { id: 'root', label: ROOT.label, de: '', body: ROOT.body, rel: ROOT.rel, b: 0, eyebrow: 'Punto de partida' };
+  ORDER.push('root');
+
+  function walk(node, b, depthLabel) {
+    node.b = b;
+    node.eyebrow = depthLabel;
+    N[node.id] = node;
+    ORDER.push(node.id);
+    (node.kids || []).forEach(function (k) { walk(k, b, depthLabel); });
+  }
+  BRANCHES.forEach(function (br) {
+    var tag = br.no + ' · ' + br.label.toUpperCase();
+    walk(br, Number(br.no), tag);
+  });
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text) e.textContent = text;
+    return e;
+  }
+
+  function nodeItem(n) {
+    var li = el('li');
+    var btn = el('button', 'node');
+    btn.type = 'button';
+    btn.dataset.id = n.id;
+    btn.appendChild(document.createTextNode(n.label));
+    if (n.sub) btn.appendChild(el('span', 'sub', n.sub));
+    li.appendChild(btn);
+    if (n.kids && n.kids.length) li.appendChild(kidsList(n.kids));
+    return li;
+  }
+  function kidsList(kids) {
+    var ul = el('ul', 'kids');
+    kids.forEach(function (k) { ul.appendChild(nodeItem(k)); });
+    return ul;
+  }
+
+  var cols = document.getElementById('cols');
+  BRANCHES.forEach(function (br) {
+    var sec = el('section', 'branch');
+    sec.dataset.b = br.no;
+    var head = el('button', 'head');
+    head.type = 'button';
+    head.dataset.id = br.id;
+    head.appendChild(el('span', 'no', br.no));
+    head.appendChild(el('span', 'name', br.label));
+    head.appendChild(el('span', 'q', br.q));
+    var row = el('div', 'head-row');
+    row.appendChild(head);
+    var tog = el('button', 'tog');
+    tog.type = 'button';
+    tog.setAttribute('aria-expanded', 'true');
+    tog.setAttribute('aria-label', 'Mostrar u ocultar los conceptos de ' + br.label);
+    tog.appendChild(el('span', 'chev'));
+    row.appendChild(tog);
+    sec.appendChild(row);
+    sec.appendChild(kidsList(br.kids));
+    cols.appendChild(sec);
+  });
+
+  /* Ventana emergente */
+  var overlay = document.getElementById('overlay');
+  var card = document.getElementById('card');
+  var mClose = document.getElementById('m-close');
+  var mEyebrow = document.getElementById('m-eyebrow');
+  var mTitle = document.getElementById('m-title');
+  var mDe = document.getElementById('m-de');
+  var mBody = document.getElementById('m-body');
+  var mRel = document.getElementById('m-rel');
+  var mRelWrap = document.getElementById('m-rel-wrap');
+  var mPrev = document.getElementById('m-prev');
+  var mNext = document.getElementById('m-next');
+  var mPos = document.getElementById('m-pos');
+  var current = null;
+  var opener = null;
+
+  function show(id) {
+    var n = N[id];
+    if (!n) return;
+    current = id;
+    card.style.setProperty('--bc', n.b ? 'var(--c' + n.b + ')' : 'var(--ink)');
+    mEyebrow.textContent = n.eyebrow;
+    mTitle.textContent = n.label;
+    if (n.de) { mDe.textContent = n.de; mDe.hidden = false; } else { mDe.hidden = true; }
+    mBody.textContent = '';
+    n.body.forEach(function (t) { mBody.appendChild(el('p', '', t)); });
+    mRel.textContent = '';
+    var rels = (n.rel || []).filter(function (r) { return N[r]; });
+    mRelWrap.hidden = rels.length === 0;
+    rels.forEach(function (r) {
+      var c = el('button', 'chip', N[r].label);
+      c.type = 'button';
+      c.dataset.go = r;
+      c.style.setProperty('--bc', N[r].b ? 'var(--c' + N[r].b + ')' : 'var(--ink)');
+      mRel.appendChild(c);
+    });
+    var i = ORDER.indexOf(id);
+    mPrev.disabled = i <= 0;
+    mNext.disabled = i >= ORDER.length - 1;
+    mPos.textContent = (i + 1) + ' / ' + ORDER.length;
+    card.scrollTop = 0;
+  }
+
+  function openModal(id, from) {
+    opener = from || null;
+    show(id);
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+    mClose.focus();
+  }
+  function closeModal() {
+    overlay.hidden = true;
+    document.body.style.overflow = '';
+    current = null;
+    if (opener && document.contains(opener)) opener.focus();
+  }
+  function step(d) {
+    var i = ORDER.indexOf(current) + d;
+    if (i >= 0 && i < ORDER.length) show(ORDER[i]);
+  }
+
+  document.addEventListener('click', function (e) {
+    var tg = e.target.closest('.tog');
+    if (tg) {
+      var closed = tg.closest('.branch').classList.toggle('closed');
+      tg.setAttribute('aria-expanded', String(!closed));
+      return;
+    }
+    var t = e.target.closest('[data-id]');
+    if (t && !overlay.contains(t)) { openModal(t.dataset.id, t); return; }
+    var g = e.target.closest('[data-go]');
+    if (g) { show(g.dataset.go); mClose.focus(); return; }
+    if (e.target === overlay) closeModal();
+  });
+  mClose.addEventListener('click', closeModal);
+  mPrev.addEventListener('click', function () { step(-1); });
+  mNext.addEventListener('click', function () { step(1); });
+
+  document.addEventListener('keydown', function (e) {
+    if (overlay.hidden) return;
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key === 'ArrowLeft') { step(-1); return; }
+    if (e.key === 'ArrowRight') { step(1); return; }
+    if (e.key === 'Tab') {
+      var f = card.querySelectorAll('button:not([disabled])');
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+})();
+</script>
+
+</body></html>
